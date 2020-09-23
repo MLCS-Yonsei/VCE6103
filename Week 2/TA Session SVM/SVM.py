@@ -137,3 +137,27 @@ plot_classification(SVC(kernel='poly', degree=2, C=0.1), data2)
 plot_classification(SVC(kernel='poly', degree=3, C=0.1), data2)
 ''' Gaussian (radial basis function) kernel '''
 plot_classification(SVC(kernel='rbf', C=1.0), data2)
+
+
+### Loss and Penalty
+''' l1 SVM '''
+from sklearn.svm import LinearSVC
+
+plot_classification(LinearSVC(penalty='l1', dual=False, C=1.0), data2)
+
+
+### SVM for multiclass data
+data3 = Data(make_blobs, centers=3, random_state=27)
+
+plt.figure(figsize=(8, 8))
+plt.scatter(data3.x0, data3.x1, c=data3.Y, edgecolors='k', cmap=plt.cm.Paired)
+plt.xticks(())
+plt.yticks(())
+plt.show()
+
+
+plot_classification(SVC(kernel='linear', C=1.0), data3)
+plot_classification(SVC(kernel='poly', C=1.0, degree=2), data3)
+plot_classification(SVC(kernel='poly', C=1.0, degree=3), data3)
+plot_classification(SVC(kernel='rbf', C=1.0), data3)
+plot_classification(SVC(kernel='rbf', C=1e6, max_iter=1e6), data3)
